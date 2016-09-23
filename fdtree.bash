@@ -259,6 +259,7 @@ function remove_files
 ##############################################################################
 # set defaults for paramters and process command line options
 ##############################################################################
+VERSION="1.0.2"			# release version
 base="LEVEL0"			# start tree in CWD/LEVEL0
 start_dir="."			# starting pathname
 declare -i levels=4		# 4 levels in tree
@@ -268,6 +269,7 @@ declare -i fsize=10		# size of files in file system blocks (4096B)
 declare -i DEBUG=0		# DEBUG FLAG.  Default is off
 declare -i CREATE_TREE=0	# Create tree flag
 declare -i REMOVE_TREE=0	# Remove tree flag
+OPTIND=0			# initialize to 0 before getopts call
 
 while getopts ":l:d:f:s:o:CDR" opt; do
     case $opt in
@@ -336,7 +338,7 @@ done
 # compute the number of files that will be created.
 declare -i nftot=ndtot*files_per_dir
 
-echo "fdtree: starting at $base"
+echo "fdtree-"$VERSION": starting at $base"
 echo -e "\tcreating/deleting $levels directory levels with $dirs_per_level directories at each level"
 echo -e "\tfor a total of $ndtot directories"
 echo -e "\twith $files_per_dir files of size $((fsize*4))KiB per directory"
